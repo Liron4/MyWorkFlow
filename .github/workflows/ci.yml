@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-3-9:
+    uses: ./.github/workflows/reusable-quality.yml
+    with:
+      python-version: '3.9'
+      action: lint
+
+  lint-3-10:
+    uses: ./.github/workflows/reusable-quality.yml
+    with:
+      python-version: '3.10'
+      action: lint
+
+  test-3-9:
+    uses: ./.github/workflows/reusable-quality.yml
+    with:
+      python-version: '3.9'
+      action: test
+
+  test-3-10:
+    uses: ./.github/workflows/reusable-quality.yml
+    with:
+      python-version: '3.10'
+      action: test
