@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       python-version:
-        required: true
+        required: false
         type: string
       action:
         required: true
@@ -29,3 +29,16 @@ jobs:
       - name: Run pytest
         if: ${{ inputs.action == 'test' }}
         run: PYTHONPATH=src pytest
+
+      - name: Docker Build
+        if: ${{ inputs.action == 'docker' }}
+        run: |
+          
+          COMMIT_SHA=$(git rev-parse --short HEAD)
+          
+          
+          docker build -t myworkflow:latest -t myworkflow:${COMMIT_SHA} .
+          
+          
+          echo "Listing all Docker images:"
+          docker images
